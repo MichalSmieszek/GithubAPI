@@ -8,9 +8,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class UpdateAPI {
-    UpdateAPI(){}
+    UpdateAPI() {
+    }
+
     public void update() {
         try {
             HttpURLConnection connection = null;
@@ -26,20 +31,27 @@ public class UpdateAPI {
             }
             String finalJSON = buffer.toString();
             JSONArray mainRepoArray = new JSONArray(finalJSON);
-            for(int repoNumber=0; repoNumber<mainRepoArray.length();repoNumber++){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            Date lastDate = sdf.parse("2010-01-01T1:0:0Z");
+            for (int repoNumber = 0; repoNumber < mainRepoArray.length(); repoNumber++) {
                 JSONObject repo = mainRepoArray.getJSONObject(repoNumber);
                 String updateDate = repo.getString("updated_at");
-                System.out.print(updateDate);
-            }
+                Date date = sdf.parse(updateDate);
+                if (date.after(lastDate)){
+                    lastDate=date;
+                }
 
+            }
+            System.out.print(lastDate);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
-
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-    }
 
+    }
 }
