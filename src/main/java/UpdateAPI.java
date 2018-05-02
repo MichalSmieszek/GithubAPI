@@ -32,17 +32,21 @@ public class UpdateAPI {
             String finalJSON = buffer.toString();
             JSONArray mainRepoArray = new JSONArray(finalJSON);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            // there isn't any date before 2016
             Date lastDate = sdf.parse("2010-01-01T1:0:0Z");
+            String lastRepoName="";
             for (int repoNumber = 0; repoNumber < mainRepoArray.length(); repoNumber++) {
                 JSONObject repo = mainRepoArray.getJSONObject(repoNumber);
                 String updateDate = repo.getString("updated_at");
+                String repoName = repo.getString("name");
                 Date date = sdf.parse(updateDate);
                 if (date.after(lastDate)){
                     lastDate=date;
+                    lastRepoName=repoName;
                 }
 
             }
-            System.out.print(lastDate);
+            System.out.print(lastRepoName);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
