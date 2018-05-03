@@ -32,7 +32,6 @@ public class UpdateAPI {
             String finalJSON = buffer.toString();
             JSONArray mainRepoArray = new JSONArray(finalJSON);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            // there isn't any date before 2016
             Date lastDate = sdf.parse("2010-01-01T1:0:0Z");
             String lastRepoName="";
             for (int repoNumber = 0; repoNumber < mainRepoArray.length(); repoNumber++) {
