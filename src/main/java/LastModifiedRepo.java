@@ -10,12 +10,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
 
-public class UpdateAPI {
-    UpdateAPI() {
+public class LastModifiedRepo {
+    LastModifiedRepo(){
+
     }
-
     public void update() {
         try {
             HttpURLConnection connection = null;
@@ -40,12 +40,10 @@ public class UpdateAPI {
                 String updateDate = repo.getString("updated_at");
                 String repoName = repo.getString("name");
                 Date date = sdf.parse(updateDate);
-                System.out.println(repoNumber+" "+repoName);
                 if (date.after(lastDate)){
                     lastDate=date;
                     lastRepoName=repoName;
                 }
-
             }
             System.out.print(lastRepoName);
         } catch (IOException e) {
@@ -59,4 +57,5 @@ public class UpdateAPI {
         }
 
     }
+
 }
