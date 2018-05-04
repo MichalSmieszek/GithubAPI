@@ -10,8 +10,8 @@ import java.net.URL;
 public class Status200 {
 // checking if response code is 200
     @Test
-    public void testBadRequestWithOrderMisspelled() throws IOException{
-        URL url = new URL("https://api.github.com/users/allegro/repos");
+    public void testCode200() throws IOException{
+        URL url = new URL("https://api.github.com/users/allegro/repos?per_page=100000");
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
         int statusCode = http.getResponseCode();
         Assert.assertEquals(200,statusCode);

@@ -13,7 +13,7 @@ public class ComparingDates {
     public void checkSeveralDates()throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
          date1 = sdf.parse("2010-01-01T1:0:0Z");
-         date2= sdf.parse("2010-01-02T1:0:0Z");
+         date2 = sdf.parse("2010-01-02T1:0:0Z");
          date3 = sdf.parse("2010-01-01T1:0:1Z");
          date4 = sdf.parse("2011-01-01T1:0:0Z");
     }

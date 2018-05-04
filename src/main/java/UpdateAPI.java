@@ -20,7 +20,8 @@ public class UpdateAPI {
         try {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
-            URL url = new URL("https://api.github.com/users/allegro/repos");
+            // I think, you won't have more than 100000 repos ;)
+            URL url = new URL("https://api.github.com/users/allegro/repos?per_page=100000");
             connection = (HttpURLConnection) url.openConnection();
             InputStream stream = connection.getInputStream();
             reader = new BufferedReader(new InputStreamReader(stream));
@@ -39,6 +40,7 @@ public class UpdateAPI {
                 String updateDate = repo.getString("updated_at");
                 String repoName = repo.getString("name");
                 Date date = sdf.parse(updateDate);
+                System.out.println(repoNumber+" "+repoName);
                 if (date.after(lastDate)){
                     lastDate=date;
                     lastRepoName=repoName;
